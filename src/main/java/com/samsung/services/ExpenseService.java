@@ -5,5 +5,5 @@ import com.samsung.entities.Expense;
 import java.util.List;
 
 public interface ExpenseService {
-    public List<Expense> getAllExpenses();
+    List<Expense> getAllExpenses();
 }
