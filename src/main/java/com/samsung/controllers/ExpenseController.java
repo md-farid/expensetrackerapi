@@ -17,13 +17,18 @@ public class ExpenseController {
         return expenseService.getAllExpenses();
     }
 
+    @PostMapping("/expenses")
+    public Expense saveExpenseDetails(@RequestBody Expense expense){
+        return expenseService.saveExpenseDetails(expense);
+    }
+
     @GetMapping("/expenses/{id}")
     public Expense getExpenseById(@PathVariable Long id){
         return expenseService.getExpenseById(id);
     }
 
     @DeleteMapping("/expenses")
-    public String deleteExpenseById(@RequestParam Long id){
-        return "Delete Expense with id: "+id;
+    public void deleteExpenseById(@RequestParam Long id){
+        expenseService.deleteExpenseById(id);
     }
 }
