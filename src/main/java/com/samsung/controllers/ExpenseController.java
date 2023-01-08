@@ -22,6 +22,11 @@ public class ExpenseController {
         return expenseService.saveExpenseDetails(expense);
     }
 
+    @PutMapping("/expenses/{id}")
+    public Expense updateExpenseDetails(@PathVariable Long id, @RequestBody Expense expense){
+        return expenseService.updateExpenseDetails(id,expense);
+    }
+
     @GetMapping("/expenses/{id}")
     public Expense getExpenseById(@PathVariable Long id){
         return expenseService.getExpenseById(id);
