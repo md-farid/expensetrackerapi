@@ -3,6 +3,7 @@ package com.samsung.controllers;
 import com.samsung.entities.Expense;
 import com.samsung.services.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ExpenseController {
         return expenseService.getAllExpenses();
     }
 
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/expenses")
     public Expense saveExpenseDetails(@RequestBody Expense expense){
         return expenseService.saveExpenseDetails(expense);
@@ -32,6 +34,7 @@ public class ExpenseController {
         return expenseService.getExpenseById(id);
     }
 
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @DeleteMapping("/expenses")
     public void deleteExpenseById(@RequestParam Long id){
         expenseService.deleteExpenseById(id);
