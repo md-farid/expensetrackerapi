@@ -1,7 +1,7 @@
 package com.samsung.services;
 
 import com.samsung.entities.Expense;
-import com.samsung.exceptions.ExpenseNotFoundException;
+import com.samsung.exceptions.ResourceNotFoundException;
 import com.samsung.repositories.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         if(expense.isPresent()){
             return expense.get();
         }
-        throw new ExpenseNotFoundException("Expense not found with id: "+id);
+        throw new ResourceNotFoundException("Expense not found with id: "+id);
     }
 
     @Override
