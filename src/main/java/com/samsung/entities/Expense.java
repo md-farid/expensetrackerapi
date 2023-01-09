@@ -1,5 +1,6 @@
 package com.samsung.entities;
 
+import jakarta.annotation.Nonnull;
 import lombok.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
