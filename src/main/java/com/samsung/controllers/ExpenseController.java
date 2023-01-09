@@ -2,6 +2,7 @@ package com.samsung.controllers;
 
 import com.samsung.entities.Expense;
 import com.samsung.services.ExpenseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class ExpenseController {
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/expenses")
-    public Expense saveExpenseDetails(@RequestBody Expense expense){
+    public Expense saveExpenseDetails(@Valid @RequestBody Expense expense){
         return expenseService.saveExpenseDetails(expense);
     }
 

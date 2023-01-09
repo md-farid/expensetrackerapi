@@ -1,6 +1,8 @@
 package com.samsung.entities;
 
 import jakarta.annotation.Nonnull;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +23,8 @@ public class Expense {
     private Long id;
 
     @Column(name = "expense_name")
+    @NotNull(message = "Expense name must not be null.")
+    @Size(min = 3, message = "Expense name must be at least 3 characters.")
     private String name;
 
     private String description;
