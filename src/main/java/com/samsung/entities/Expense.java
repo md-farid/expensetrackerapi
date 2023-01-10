@@ -1,6 +1,6 @@
 package com.samsung.entities;
 
-import jakarta.annotation.Nonnull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -23,15 +23,17 @@ public class Expense {
     private Long id;
 
     @Column(name = "expense_name")
-    @NotNull(message = "Expense name must not be null.")
+    @NotBlank(message = "Expense name must not be null.")
     @Size(min = 3, message = "Expense name must be at least 3 characters.")
     private String name;
 
     private String description;
 
     @Column(name = "expense_amount")
+    @NotNull(message = "Expense amount should not be empty.")
     private BigDecimal amount;
 
+    @NotBlank(message = "Category name should not be null.")
     private String category;
     private Date date;
 
