@@ -2,6 +2,7 @@ package com.samsung.services;
 
 import com.samsung.entities.User;
 import com.samsung.exceptions.ItemAlreadyExistsException;
+import com.samsung.exceptions.ResourceNotFoundException;
 import com.samsung.models.UserModel;
 import com.samsung.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -22,5 +23,12 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         BeanUtils.copyProperties(userModel,user);
         return userRepository.save(user);
+    }
+
+    @Override
+    public User read(Long id) {
+        return userRepository.findById(id).orElseThrow(()->{
+            throw new ResourceNotFoundException("User not found with id "+id);
+        });
     }
 }
