@@ -39,4 +39,13 @@ public class GlobalExceptionHandler {
         model.setTimestamp(new Date());
         return new ResponseEntity<ErrorModel>(model,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(ItemAlreadyExistsException.class)
+    public ResponseEntity<ErrorModel> handleItemExistsException(ItemAlreadyExistsException ex, WebRequest req){
+        ErrorModel model = new ErrorModel();
+        model.setStatusCode(HttpStatus.CONFLICT.value());
+        model.setMessage(ex.getMessage());
+        model.setTimestamp(new Date());
+        return new ResponseEntity<ErrorModel>(model,HttpStatus.CONFLICT);
+    }
 }
