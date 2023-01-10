@@ -41,4 +41,10 @@ public class UserServiceImpl implements UserService{
         user.setAge(userModel.getAge()!=null ? userModel.getAge() : user.getAge());
         return userRepository.save(user);
     }
+
+    @Override
+    public void delete(Long id) {
+        User user = read(id);
+        userRepository.delete(user);
+    }
 }
