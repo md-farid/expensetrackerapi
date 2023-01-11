@@ -41,8 +41,10 @@ public class ProjectSecurityConfiguration {
                 .build();
         return new InMemoryUserDetailsManager(admin,user);
     }*/
-    /**
+
+
     // 2nd approach create multiple users
+    /**
     @Bean
     InMemoryUserDetailsManager userDetailsManager(){
         InMemoryUserDetailsManager inMemoryUserDetailsManager =
