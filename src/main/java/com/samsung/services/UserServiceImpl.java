@@ -7,6 +7,7 @@ import com.samsung.models.UserModel;
 import com.samsung.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User createUser(UserModel userModel) {
         if(userRepository.existsByEmail(userModel.getEmail())){
@@ -22,6 +26,7 @@ public class UserServiceImpl implements UserService{
         }
         User user = new User();
         BeanUtils.copyProperties(userModel,user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -37,7 +42,7 @@ public class UserServiceImpl implements UserService{
         User user = read(id);
         user.setName(userModel.getName()!=null ? userModel.getName() : user.getName());
         user.setEmail(userModel.getEmail()!=null ? userModel.getEmail() : user.getEmail());
-        user.setPassword(userModel.getPassword()!=null ? userModel.getPassword() : user.getPassword());
+        user.setPassword(userModel.getPassword()!=null ? passwordEncoder.encode(userModel.getPassword()) : user.getPassword());
         user.setAge(userModel.getAge()!=null ? userModel.getAge() : user.getAge());
         return userRepository.save(user);
     }
