@@ -8,4 +8,5 @@ public interface UserService {
     User read(Long id);
     User update(UserModel userModel, Long id);
     void delete(Long id);
+    User getLoggedInUser();
 }

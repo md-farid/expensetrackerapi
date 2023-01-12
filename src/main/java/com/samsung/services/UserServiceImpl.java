@@ -7,6 +7,9 @@ import com.samsung.models.UserModel;
 import com.samsung.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +54,14 @@ public class UserServiceImpl implements UserService{
     public void delete(Long id) {
         User user = read(id);
         userRepository.delete(user);
+    }
+
+    @Override
+    public User getLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return userRepository.findByEmail(email).orElseThrow(()->{
+            throw new UsernameNotFoundException("User not found for the email "+email);
+        });
     }
 }
