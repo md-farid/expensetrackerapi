@@ -3,11 +3,9 @@ package com.samsung.controllers;
 import com.samsung.entities.User;
 import com.samsung.models.UserModel;
 import com.samsung.services.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,19 +14,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> readUser(@PathVariable Long id){
-        return new ResponseEntity<User>(userService.read(id),HttpStatus.OK);
+    @GetMapping("/profile")
+    public ResponseEntity<User> readUser(){
+        return new ResponseEntity<User>(userService.read(),HttpStatus.OK);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody UserModel userModel,@PathVariable Long id){
-        return new ResponseEntity<User>(userService.update(userModel,id),HttpStatus.OK);
+    @PutMapping("/profile")
+    public ResponseEntity<User> updateUser(@RequestBody UserModel userModel){
+        return new ResponseEntity<User>(userService.update(userModel),HttpStatus.OK);
     }
 
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long id){
-        userService.delete(id);
+    @DeleteMapping("/deactive")
+    public ResponseEntity<HttpStatus> deleteUser(){
+        userService.delete();
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }
