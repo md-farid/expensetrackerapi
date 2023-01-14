@@ -13,13 +13,13 @@ import java.util.Optional;
 public interface ExpenseRepository extends JpaRepository<Expense,Long> {
 
     // SELECT * FROM tbl_expenses WHERE category=?
-    Page<Expense> findByCategory(String category, Pageable page);
+    Page<Expense> findByCategory(Long userId, String category, Pageable page);
 
     // SELECT * FROM tbl_expenses name LIKE '%keyword%'
-    Page<Expense> findByNameContaining(String keyword, Pageable page);
+    Page<Expense> findByNameContaining(Long userId, String keyword, Pageable page);
 
     // SELECT * FROM tbl_expenses date BETWEEN 'startDate' AND 'endDate'
-    Page<Expense> findByDateBetween(Date startDate, Date endDate, Pageable page);
+    Page<Expense> findByDateBetween(Long userId, Date startDate, Date endDate, Pageable page);
 
     // SELECT * FROM tbl_expenses WHERE userId=?
     Page<Expense> findByUserId(Long userId, Pageable page);
