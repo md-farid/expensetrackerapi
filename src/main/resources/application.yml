@@ -14,4 +14,4 @@ spring:
     show-sql: true
 
 jwt:
-  secret: farid@1510
+  secret: farid1510
